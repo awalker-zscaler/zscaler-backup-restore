@@ -10,9 +10,9 @@ function Get-ZPAAPISession
     PS> Get-ZPAAPISession
     #>
 
-    $ZPAhost = $global:ZPAEnvironment.ZPAhost
-    $client_id = $global:ZPAEnvironment.client_id
-    $client_secret = $global:ZPAEnvironment.client_secret
+    $ZPAhost = $global:zscaler.ZPAEnvironment.ZPAhost
+    $client_id = $global:zscaler.ZPAEnvironment.client_id
+    $client_secret = $global:zscaler.ZPAEnvironment.client_secret
 
 
     #
@@ -33,7 +33,7 @@ function Get-ZPAAPISession
     # send login request
     #
     $result = Invoke-RestMethod -Uri $uri -Method Post -Form $parameters
-    $global:ZPAEnvironment.token = $result[0].access_token
+    $global:zscaler.ZPAEnvironment.token = $result[0].access_token
 }
 
 function Remove-ZPAAPISession
@@ -49,8 +49,8 @@ function Remove-ZPAAPISession
     #>
 
     # set the URI
-    $uri = ("https://{0}/signout" -f $global:ZPAEnvironment.ZPAhost)
-    $token = $global:ZPAEnvironment.token
+    $uri = ("https://{0}/signout" -f $global:zscaler.ZPAEnvironment.ZPAhost)
+    $token = $global:zscaler.ZPAEnvironment.token
 
     # log out of the authenticated session
     $result = Invoke-RestMethod -Uri $uri -Method Post -Headers @{ Authorization = "Bearer $token"}
@@ -129,7 +129,7 @@ function Set-ZPAEnvironment
         [Parameter(Mandatory=$true)][string]$customer_id
     )
 
-    $global:ZPAEnvironment = [PSCustomObject]@{
+    $global:zscaler.ZPAEnvironment = [PSCustomObject]@{
         ZPAhost = $ZPAhost
         client_id = $client_id
         client_secret = $client_secret
@@ -150,5 +150,5 @@ function Get-ZPASessionCookie
     PS> Get-ZPASessionCookie
     eyJraWQiOiJua29W[...]QPzwRI8T1uI0A
     #>
-    return $Global:ZPAEnvironment.token
+    return $global:zscaler.ZPAEnvironment.token
 }
