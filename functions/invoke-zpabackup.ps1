@@ -47,3 +47,9 @@ IF($global:zscaler.modules.ZPA.submodules.Authentication -eq $true -and $global:
 }ELSE{
     Write-Host "There were some errors loading modules. This will cause issues going forward in this application. " -ForegroundColor Red
 }
+
+Write-Host "Authenticating against the Zscaler ZPA API "
+# Log in to Zscaler ZPA API
+IF(Invoke-ZPAAPILOGIN){
+    Write-Host "Authenticating against the Zscaler ZPA API "
+}
