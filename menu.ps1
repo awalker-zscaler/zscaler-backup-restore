@@ -20,9 +20,9 @@ $global:zscaler = [PSCustomObject]@{
     }
     ZPAEnvironment = [PSCustomObject]@{
         ZPAhost = "https://config.zpagov.net"
-        client_id = ""
-        client_secret = ''
-        customer_id = ''
+        client_id = "NzIwNTgwMzMxOTgzMzM5NjQtMjE5NDc5YjAtZDg0Zi00NjVkLTg3YmEtOTg2N2ZmMTk1MDdm"
+        client_secret = '?p#!,KMy4$X2#wcEk5`K$r08.3~kvl~?'
+        customer_id = '72058033198333952'
         token = ""
         authenticated = $false
         Backups = @()
