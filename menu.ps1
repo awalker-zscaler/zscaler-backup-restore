@@ -20,9 +20,9 @@ $global:zscaler = [PSCustomObject]@{
     }
     ZPAEnvironment = [PSCustomObject]@{
         ZPAhost = "https://config.zpagov.net"
-        client_id = "NzIwNTgwMzMxOTgzMzM5NjQtMjE5NDc5YjAtZDg0Zi00NjVkLTg3YmEtOTg2N2ZmMTk1MDdm"
-        client_secret = '?p#!,KMy4$X2#wcEk5`K$r08.3~kvl~?'
-        customer_id = '72058033198333952'
+        client_id = ""
+        client_secret = ''
+        customer_id = ''
         token = ""
         authenticated = $false
         Backups = @()
@@ -31,14 +31,18 @@ $global:zscaler = [PSCustomObject]@{
 
 # Get Client ID
 IF($null -eq $global:zscaler.ZPAEnvironment.client_id){
-    
+    Read-Host -Prompt "Please provide your client ID.`n`n Your client ID can be found on this page:`nhttps://admin.zpagov.net/#clientCredentials"
 }
 
 # Get Client Secret
-IF($null -eq $global:zscaler.ZPAEnvironment.client_secret){}
+IF($null -eq $global:zscaler.ZPAEnvironment.client_secret){
+    Read-Host -Prompt "Please provide your client secret.`n`n Your client secret is only presented the first time you create an API key. "
+}
 
 # Get Customer ID
-IF($null -eq $global:zscaler.ZPAEnvironment.customer_id){}
+IF($null -eq $global:zscaler.ZPAEnvironment.customer_id){
+    Read-Host -Prompt "Please provide your Customer ID.`n`n Your customer ID can be found on the API page, just click copy customer ID at the top right of the page. "
+}
 
 Function Invoke-Menu {
     $backup = New-Object System.Management.Automation.Host.ChoiceDescription '&Backup', 'Backup: Backup my configurations. '
