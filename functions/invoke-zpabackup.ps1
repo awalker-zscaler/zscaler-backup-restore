@@ -38,7 +38,7 @@ IF(Invoke-ZPAAPILOGIN){
 # Grab functions from the ZPA Swagger API
 IF($global:zscaler.ZPAEnvironment.authenticated){
     Write-Host "Grabbing ZPA SWAGGER 2.0 Functions" -NoNewline
-    Invoke-Expression(Invoke-WebRequest -Uri "https://raw.githubusercontent.com/awalker-zscaler/zscaler-backup-restore/main/functions/zpa/invoke-zpa-swagger.ps1")
+    Invoke-Expression((Invoke-WebRequest -Uri "https://raw.githubusercontent.com/awalker-zscaler/zscaler-backup-restore/main/functions/zpa/invoke-zpa-swagger.ps1").content)
     IF($null -ne $global:zscaler.Modules.ZPA.Swagger){
         Write-Host " SUCCESS" -ForegroundColor Green
     }ELSE{
