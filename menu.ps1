@@ -4,10 +4,10 @@ Write-Host " - Public Sector Professional Services - " -NoNewline
 Write-Host " Backup and Restore Utility`n`n" -ForegroundColor Red
 
 # Show MIT License
-Write-Host (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/awalker-zscaler/zscaler-backup-restore/main/LICENSE").content -ForegroundColor DarkGray
+Write-Host (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/$($global:zscaler.settings.Github.owner)/$($global:zscaler.settings.Github.Repo)/main/LICENSE").content -ForegroundColor DarkGray
 
 # Show Script README.md
-Write-Host (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/awalker-zscaler/zscaler-backup-restore/main/README.md").content
+Write-Host (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/$($global:zscaler.settings.Github.owner)/$($global:zscaler.settings.Github.Repo)/main/README.md").content
 
 # Set Variables
 $global:zscaler = [PSCustomObject]@{
@@ -16,6 +16,12 @@ $global:zscaler = [PSCustomObject]@{
             isloaded = $false
             Authentication = $false 
             Swagger = ""
+        }
+    }
+    settings = [PSCustomObject]@{
+        Github = [PSCustomObject]@{
+            Owner = "awalker-zscaler"
+            Repo = "zscaler-backup-restore"
         }
     }
     ZPAEnvironment = [PSCustomObject]@{
@@ -80,7 +86,7 @@ Function Invoke-Menu_Backup {
     $result = $host.ui.PromptForChoice($title, $message, $options, 3)
     IF($result -eq 0){
         # ZPA Selected
-        Invoke-Expression(Invoke-WebRequest("https://raw.githubusercontent.com/awalker-zscaler/zscaler-backup-restore/main/functions/invoke-zpabackup.ps1").content)
+        Invoke-Expression(Invoke-WebRequest("https://raw.githubusercontent.com/$($global:zscaler.settings.Github.owner)/$($global:zscaler.settings.Github.Repo)/main/functions/invoke-zpabackup.ps1").content)
         
     }
     ELSEIF($result -eq 1){
