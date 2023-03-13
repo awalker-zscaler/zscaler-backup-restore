@@ -3,12 +3,6 @@ Write-Host "`nZSCALER " -ForegroundColor Cyan -NoNewline
 Write-Host " - Public Sector Professional Services - " -NoNewline
 Write-Host " Backup and Restore Utility`n`n" -ForegroundColor Red
 
-# Show MIT License
-Write-Host (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/$($global:zscaler.settings.Github.owner)/$($global:zscaler.settings.Github.Repo)/main/LICENSE").content -ForegroundColor DarkGray
-
-# Show Script README.md
-Write-Host (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/$($global:zscaler.settings.Github.owner)/$($global:zscaler.settings.Github.Repo)/main/README.md").content
-
 # Set Variables
 $global:zscaler = [PSCustomObject]@{
     Modules = [PSCustomObject]@{
@@ -34,6 +28,12 @@ $global:zscaler = [PSCustomObject]@{
         Backups = @()
     }
 }
+
+# Show MIT License
+Write-Host (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/$($global:zscaler.settings.Github.owner)/$($global:zscaler.settings.Github.Repo)/main/LICENSE").content -ForegroundColor DarkGray
+
+# Show Script README.md
+Write-Host (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/$($global:zscaler.settings.Github.owner)/$($global:zscaler.settings.Github.Repo)/main/README.md").content
 
 # Get Client ID
 IF($null -eq $global:zscaler.ZPAEnvironment.client_id){
