@@ -9,7 +9,36 @@ Write-Host (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/awalker-zs
 # Show Script README.md
 Write-Host (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/awalker-zscaler/zscaler-backup-restore/main/README.md").content
 
+# Set Variables
+$global:zscaler = [PSCustomObject]@{
+    Modules = [PSCustomObject]@{
+        ZPA = [PSCustomObject]@{
+            isloaded = $false
+            Authentication = $false 
+            Swagger = ""
+        }
+    }
+    ZPAEnvironment = [PSCustomObject]@{
+        ZPAhost = "https://config.zpagov.net"
+        client_id = "NzIwNTgwMzMxOTgzMzM5NjQtMjE5NDc5YjAtZDg0Zi00NjVkLTg3YmEtOTg2N2ZmMTk1MDdm"
+        client_secret = '?p#!,KMy4$X2#wcEk5`K$r08.3~kvl~?'
+        customer_id = '72058033198333952'
+        token = ""
+        authenticated = $false
+        Backups = @()
+    }
+}
 
+# Get Client ID
+IF($null -eq $global:zscaler.ZPAEnvironment.client_id){
+    
+}
+
+# Get Client Secret
+IF($null -eq $global:zscaler.ZPAEnvironment.client_secret){}
+
+# Get Customer ID
+IF($null -eq $global:zscaler.ZPAEnvironment.customer_id){}
 
 Function Invoke-Menu {
     $backup = New-Object System.Management.Automation.Host.ChoiceDescription '&Backup', 'Backup: Backup my configurations. '
@@ -47,6 +76,7 @@ Function Invoke-Menu_Backup {
     $result = $host.ui.PromptForChoice($title, $message, $options, 3)
     IF($result -eq 0){
         # ZPA Selected
+        Invoke-Expression(Invoke-WebRequest("https://raw.githubusercontent.com/awalker-zscaler/zscaler-backup-restore/main/functions/invoke-zpabackup.ps1"))
         
     }
     ELSEIF($result -eq 1){
