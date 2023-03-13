@@ -80,7 +80,7 @@ Function Invoke-Menu_Backup {
     $result = $host.ui.PromptForChoice($title, $message, $options, 3)
     IF($result -eq 0){
         # ZPA Selected
-        Invoke-Expression(Invoke-WebRequest("https://raw.githubusercontent.com/awalker-zscaler/zscaler-backup-restore/main/functions/invoke-zpabackup.ps1"))
+        Invoke-Expression(Invoke-WebRequest("https://raw.githubusercontent.com/awalker-zscaler/zscaler-backup-restore/main/functions/invoke-zpabackup.ps1").content)
         
     }
     ELSEIF($result -eq 1){
