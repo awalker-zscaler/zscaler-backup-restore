@@ -103,13 +103,14 @@ $savefile = Save-File "%userprofile%\Downloads"
     backups = $global:zscaler.ZPAEnvironment.backups
 }
 if ($SaveFile -ne "") {
-    [PSCustomObject]@{
+    $file = [PSCustomObject]@{
         ZPAhost = $global:zscaler.ZPAEnvironment.zpahost
         client_id = $global:zscaler.ZPAEnvironment.client_id
         customer_id = $global:zscaler.ZPAEnvironment.customer_id
         backups = $global:zscaler.ZPAEnvironment.backups
-    } | Export-CLIXML -depth 10 -path $savefile
+    } 
+    $file | Export-CLIXML -depth 15 -path $savefile
     
 } else {
-    echo "No File was chosen"
+    Write-Output "No File was chosen"
 }
